@@ -34,8 +34,6 @@ app.put("/produtos/:id", (req, res) => {
     produtoParaAtualizar.ProdValorUnit = produtoComDadosNovos.ProdValorUnit
 
     res.status(204).send();
-
-    res.status(200).send(listaProdutos);
 });
 
 app.delete("/produtos/:id", (req, res) => {
