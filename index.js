@@ -1,6 +1,7 @@
 const express = require("express");
 
 const app = express();
+const porta = 5070;
 app.use(express.json());
 
 let contador = 0;
@@ -8,6 +9,16 @@ const listaProdutos = [];
 
 app.get("/produtos", (req, res) => {
     res.status(200).send(listaProdutos);
+});
+
+app.get("/produtos/:id", (req, res) => {
+    let produtoProcurado = {};
+    listaProdutos.forEach(produto => {
+        if (produto.id == req.params.id) {
+            produtoProcurado = produto;
+        }
+    });
+    res.status(200).json(produtoProcurado);
 });
 
 app.post("/produtos", (req, res) => {
@@ -45,7 +56,6 @@ app.delete("/produtos/:id", (req, res) => {
     res.status(200).send(listaProdutos);
 });
 
-const porta = 5050;
 app.listen(porta, (() =>
-    console.log(`CRUD produtos iniciado. http://localhost:${porta}`)
+    console.log(`Microsserviço de produtos iniciado. http://localhost:${porta}`)
 ));
